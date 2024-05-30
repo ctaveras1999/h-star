@@ -40,7 +40,7 @@ def almost_equal(x, y, eps=1e-8):
     return np.linalg.norm(np.array(x) - np.array(y)) < eps
 
 
-def hstar(SC, start, end, ref_proj, alpha, verbose=False, other=False):
+def hstar(SC, start, end, ref_proj, alpha, verbose=False, other=False, get_proj=False):
     prev = {}
     dist = {v:np.inf for v in range(SC.node_vec.shape[0])}
     proj = {v:np.inf * np.ones(ref_proj.shape) for v in range(SC.node_vec.shape[0])}
@@ -106,7 +106,11 @@ def hstar(SC, start, end, ref_proj, alpha, verbose=False, other=False):
     else: 
         other_paths = []
 
-    return path, dist[end], prev, visit_order, other_paths
+
+    if not get_proj:
+        return path, dist[end], prev, visit_order, other_paths
+
+    return path, dist[end], prev, visit_order, other_paths, proj
 
 
 def complete(SC, partial, ref_path, end, alpha):

@@ -221,11 +221,11 @@ class SimplicialComplex:
         parity = -2 * int(e1 > e2) + 1
         return idx, parity
 
-    def make_holes(self, hole_locs, r=0.25):
+    def make_holes(self, hole_locs, r=0.25, norm=1):
         hole_nodes = set()
         
         for i, hole in enumerate(hole_locs):
-            dist_from_nodes = np.linalg.norm(self.nodes - hole, axis=1, ord=1)
+            dist_from_nodes = np.linalg.norm(self.nodes - hole, axis=1, ord=norm)
             hole_idx = set(np.where((dist_from_nodes < r) == True)[0])
             hole_nodes = hole_nodes.union(hole_idx)
         
