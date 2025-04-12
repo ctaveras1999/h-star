@@ -308,7 +308,7 @@ class Path:
         else:
             self.proj = y.ravel()
             self.proj_seq = None
-        return y.ravel()
+        return y
 
     def proj_diff(self, other, seq=False):
         if not seq:
@@ -356,6 +356,7 @@ class Path:
             assert(other[0] == self.nodes[-1])
             return Path(self.SC, np.append(self.nodes, other), False)
         elif isinstance(other, Path):
+            print('sdsdfsfwsff')
             assert(self.nodes[-1] == other.nodes[0])
             return Path(self.SC, np.append(self.nodes, other.nodes[1:]), False)
 
